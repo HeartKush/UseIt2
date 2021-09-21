@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "useit-b41f4": {
+      "hosting": {
+        "toyChikito": [
+          "useit-b41f4"
+        ]
+      }
+    }
+  }
+}
