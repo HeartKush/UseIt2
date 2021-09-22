@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { EnterprisesComponent } from './enterprises/enterprises.component';
+import { GuestsComponent } from './guests/guests.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { EnterprisesComponent } from './enterprises/enterprises.component';
         SignupComponent,
         LoginComponent,
         DashboardComponent,
-        EnterprisesComponent
+        EnterprisesComponent,
+        GuestsComponent,
     ],
     imports: [
         BrowserModule,

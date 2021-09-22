@@ -4,7 +4,22 @@ import { EnterpriseService } from '../services/model/enterprise.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth } from "firebase/auth";
-
+import { Observable } from 'rxjs';
+interface Enterprise{ 
+  nit: string,
+  rol: string,
+  owner_user_email: string,
+  name: string
+  comercial_name: string,
+  address: string,
+  phone_number: string,
+  email: string,
+  website: string,
+  country: string,
+  state: string,
+  city: string,
+  owner_id: string
+}
 
 
 @Component({
@@ -14,8 +29,10 @@ import { getAuth } from "firebase/auth";
 })
 export class EnterprisesComponent implements OnInit {
   enterprisesForm: FormGroup | any;
+  enterprise : any = '';
 
   constructor(private enterpriseService: EnterpriseService, private router: Router, private afAuth: AngularFireAuth) { }
+
 
   ngOnInit(): void {
     this.enterprisesForm = new FormGroup({
@@ -33,7 +50,12 @@ export class EnterprisesComponent implements OnInit {
 
 
   }
-
+  testEnterprise(){
+    let dos : any;
+    dos = this.enterpriseService.getEnterprise('21121');
+    
+    console.log(dos)
+  }
   crearEmpresa() {
     if (this.enterprisesForm.invalid)
       return;
