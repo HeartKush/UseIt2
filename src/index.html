@@ -12,5 +12,20 @@
 </head>
 <body class="mat-typography">
   <app-root></app-root>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(() => {  
+        var items = document.querySelectorAll('.flex-column li a');
+        items.forEach((item)=>{
+            if ( item.getAttribute('data-current-item') == document.URL.replace('http://localhost:4200/','')){
+                item.classList.add("active2");
+                item.classList.remove("link-dark");        
+            }
+        });
+      }, 600);
+      
+    });
+    
+  </script>
 </body>
 </html>

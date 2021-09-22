@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { SharedModule } from './shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -35,13 +35,11 @@ import { GuestsComponent } from './guests/guests.component';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-
+        SharedModule,
         AngularFireModule.initializeApp(environment.firebase),  // imports firebase/app needed for everything
-
         MatButtonModule,
         MatCardModule,
         MatInputModule,
-
         FormsModule,
         ReactiveFormsModule,
     ],
