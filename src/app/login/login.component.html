@@ -1,25 +1,29 @@
-<button mat-raised-button color="primary" routerLink="/home">
-    Home
-</button>
-
-<mat-card>
-    <form [formGroup]="loginForm" (ngSubmit)="loginUser()" type="">
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
-            </mat-form-field>
-        </p>
+<div class="container-fluid mt-5 pt-4">
+    <h1 class="text-center mb-3 mt-3 fw-bolder">Ventas Simples</h1>
+  <div class="w-50 mx-auto">
+    <form  [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <h2 class="my-2 fw-bold ">Iniciar Sesión</h2>
+      <fieldset>
+        <div class="form-group mx-auto">
+          <label for="exampleInputEmail1" class="form-label mt-4">Correo</label>
+          <input type="email" class="form-control" formControlName="email"  id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label mt-4">Contraseña</label>
+          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+        </div>
         <div *ngIf="firebaseErrorMessage != ''" class="error-style">
             <span>{{ firebaseErrorMessage }}</span>
+          </div>
+        <div class="row px-auto">
+            <button type="submit" class="mx-auto w-25 mt-5 btn btn-primary">Iniciar Sesion</button>
         </div>
-
-        <button mat-raised-button color="primary">Login</button>
+        <div class="row px-auto">
+            <p class="text-center pt-3">Aun no te has registrado? <a routerLink="/signup">crea una cuenta</a></p>
+        </div>
+      </fieldset>
     </form>
-</mat-card>
+  </div>
+</div>

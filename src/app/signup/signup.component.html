@@ -1,31 +1,36 @@
-<button mat-raised-button color="primary" routerLink="/home">
-    Home
-</button>
+<div class="container-fluid mt-5 pt-4">
 
-<mat-card>
+  <h1 class="text-center mb-3 mt-3 fw-bolder">Ventas Simples</h1>
+  <div class="w-50 mx-auto">
     <form [formGroup]="signupForm" (ngSubmit)="signup()">
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Full Name</mat-label>
-                <input autocomplete="off" formControlName="displayName" type="text" matInput placeholder="Display Name">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input formControlName="email" type="email" matInput placeholder="Email">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
-            </mat-form-field>
-        </p>
-        <!-- <div *ngIf="firebaseErrorMessage != ''" class="error-style">
-            <span>{{ firebaseErrorMessage }}</span>
-        </div> -->
-
-        <button mat-raised-button color="primary">Signup</button>
+      <h2 class="my-2 fw-bold ">Formulario de Registro</h2>
+      <fieldset>
+        <div class="form-group mx-auto">
+          <label for="exampleInputEmail1" class="form-label mt-4">Nombre</label>
+          <input type="text" class="form-control" formControlName="displayName" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Ingresa tu nombre">
+        </div>
+        <div class="form-group mx-auto">
+          <label for="exampleInputEmail1" class="form-label mt-4">Correo</label>
+          <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="ejemplo@mail.com">
+          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con alguien más.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label mt-4">Contraseña</label>
+          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1"
+            placeholder="Contraseña">
+        </div>
+        <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+          <span>{{ firebaseErrorMessage }}</span>
+        </div>
+        <div class="row px-auto">
+          <button type="submit" class="mx-auto w-25 mt-5 btn btn-primary">Registrarse</button>
+        </div>
+        <div class="row px-auto">
+          <p class="text-center pt-3">Ya estas registrado? <a routerLink="/login">Inicia sesión</a></p>
+        </div>
+      </fieldset>
     </form>
-</mat-card>
+  </div>
+</div>
