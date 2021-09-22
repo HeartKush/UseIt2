@@ -1,6 +1,6 @@
-# ToyChikito
+# UseIt-Gestión simple de un equipo de ventas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+This project was made for a Interview Test.
 
 ## Development server
 
