@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { EnterprisesComponent } from './enterprises/enterprises.component';
 import { GuestsComponent } from './guests/guests.component';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     declarations: [
         AppComponent,
@@ -42,6 +42,7 @@ import { GuestsComponent } from './guests/guests.component';
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]

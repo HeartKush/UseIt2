@@ -20,6 +20,9 @@
             if ( item.getAttribute('data-current-item') == document.URL.replace('http://localhost:4200/','')){
                 item.classList.add("active2");
                 item.classList.remove("link-dark");        
+            }else{
+              item.classList.remove("active2");
+              item.classList.add("link-dark"); 
             }
         });
       }, 600);
