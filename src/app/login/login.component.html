@@ -2,17 +2,17 @@
     <h1 class="text-center mb-3 mt-3 fw-bolder">Ventas Simples</h1>
   <div class="w-50 mx-auto">
     <form  [formGroup]="loginForm" (ngSubmit)="loginUser()">
-        <h2 class="my-2 fw-bold ">Iniciar Sesión</h2>
+        <h2 class="my-2 fw-bold mx-auto w-50 ">Iniciar Sesión</h2>
       <fieldset>
-        <div class="form-group mx-auto">
-          <label for="exampleInputEmail1" class="form-label mt-4">Correo</label>
-          <input type="email" class="form-control" formControlName="email"  id="exampleInputEmail1" aria-describedby="emailHelp"
+        <div class="form-group mx-auto w-50">
+          <label for="exampleInputEmail1" class="form-label mt-4 ">Correo</label>
+          <input type="email" class="form-control " formControlName="email"  id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="Enter email">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mx-auto w-50">
           <label for="exampleInputPassword1" class="form-label mt-4">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control " formControlName="password" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div *ngIf="firebaseErrorMessage != ''" class="error-style">
             <span>{{ firebaseErrorMessage }}</span>

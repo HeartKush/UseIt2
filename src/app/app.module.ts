@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
+
 import { environment } from '../environments/environment';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +22,11 @@ import { MatInputModule } from '@angular/material/input';
 import { EnterprisesComponent } from './enterprises/enterprises.component';
 import { GuestsComponent } from './guests/guests.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ContacsComponent } from './contacs/contacs.component';
+import { BusinessOpportunityComponent } from './business-opportunity/business-opportunity.component';
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -30,6 +36,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         DashboardComponent,
         EnterprisesComponent,
         GuestsComponent,
+        ContacsComponent,
+        BusinessOpportunityComponent,
+       
     ],
     imports: [
         BrowserModule,
@@ -42,7 +51,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule
+        NgbModule,
+        AngularFirestoreModule
     ],
     providers: [],
     bootstrap: [AppComponent]

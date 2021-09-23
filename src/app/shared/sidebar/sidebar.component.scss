@@ -1,0 +1,13 @@
+.navBar1{
+    display: flex;
+    color: aliceblue;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #3E4647;
+    width: 100vw;
+    height: max-content;
+    max-height: 80px;
+}
+.nav-pills1{
+    box-shadow: 5px 2px 10px rgb(55 94 148 / 20%), -5px 12px 10px rgb(255 255 255 / 40%);
+}

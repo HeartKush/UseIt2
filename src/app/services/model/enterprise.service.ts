@@ -15,7 +15,6 @@ export class EnterpriseService {
 
   updateEnterprise(user:string, enterprise: any) {
     let owner_user_email: string ='error@gmail.com';
-    let comercial_name: string = '';
     let website: string = '';
     let rol: string = 'Propietario';
     let owner_enterprise_email: string ='';
@@ -28,7 +27,7 @@ export class EnterpriseService {
         rol:rol,
         owner_user_email: owner_user_email,
         name: enterprise.name,
-        comercial_name: comercial_name,
+        comercial_name: enterprise.comercial_name,
         address: enterprise.address,
         phone_number: enterprise.phone_number,
         email: enterprise.email,

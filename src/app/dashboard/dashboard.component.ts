@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { EnterpriseService } from '../services/model/enterprise.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { getAuth } from "firebase/auth";
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Country, State, City }  from 'country-state-city';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   enterprisesForm: FormGroup | any;
-  constructor(private enterpriseService: EnterpriseService, private modalService: NgbModal, private router: Router) { }
+  ownerEnterprise: any;
+  has_enterprise: boolean = false;
+  guestEnterprises: any[]=[];
+  userName: any;
+  emailUser: any;
+  users:any[]=[];
+
+  constructor(private enterpriseService: EnterpriseService, private modalService: NgbModal, private router: Router, private firestoreModule: AngularFirestore, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
+    console.log(Country.getAllCountries());
+    console.log(State.getAllStates());
     this.enterprisesForm = new FormGroup({
       'nit': new FormControl('', Validators.required),
       'name': new FormControl('', Validators.required),
@@ -28,7 +40,51 @@ export class DashboardComponent implements OnInit {
       'city': new FormControl('', Validators.required)
     });
 
+    
+    this.afAuth.currentUser.then(_=>{
+      this.obtenerEmpresa(_?.email)
+      this.obtenerUsuarios(_?.email);
+    });
+    
+  }
 
+  ngOnDestroy(): void {
+    
+    this.afAuth.currentUser.then(_=>{
+      this.obtenerUsuarios(_?.email).unsubscribe();
+    });
+  }
+  obtenerEmpresa(mail:any){
+    return this.firestoreModule.collection('enterprises', ref => ref.where('owner_user_email', '==', mail)).snapshotChanges().subscribe(query=>{
+      this.users=[];  
+      if(query.length > 0) {
+        console.log(query[0].payload.doc.data());
+        this.ownerEnterprise = query[0].payload.doc.data();
+        this.has_enterprise = true;
+        this.enterprisesForm = new FormGroup({
+          'nit': new FormControl(this.ownerEnterprise.nit, Validators.required),
+          'name': new FormControl(this.ownerEnterprise.name, Validators.required),
+          'comercial_name': new FormControl(this.ownerEnterprise.comercial_name),
+          'address': new FormControl(this.ownerEnterprise.address, Validators.required),
+          'phone_number': new FormControl(this.ownerEnterprise.phone_number, Validators.required),
+          'email': new FormControl(this.ownerEnterprise.email, [Validators.required, Validators.email]),
+          'website': new FormControl(this.ownerEnterprise.website),
+          'country': new FormControl(this.ownerEnterprise.country, Validators.required),
+          'state': new FormControl(this.ownerEnterprise.state, Validators.required),
+          'city': new FormControl(this.ownerEnterprise.city, Validators.required)
+        });
+      }else {
+        console.log('Ups! parece que aun no has creado una empresa');
+      }
+    });
+  }
+  obtenerUsuarios(userEmail:any){
+     return this.firestoreModule.collection('users', ref => ref.where('email', '!=', userEmail)).snapshotChanges().subscribe(query=>{
+      this.users=[];  
+      query.forEach(user =>{
+          this.users.push(user.payload.doc.data());
+        })
+      })
   }
 
   crearEmpresa() {
@@ -51,11 +107,10 @@ export class DashboardComponent implements OnInit {
       else if (result.isValid == false)
         console.log('error')
     }).catch(() => {
-
     });
+
   }
-
-
+  
   open(content:any) {
     let dos = this;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result:any) => {

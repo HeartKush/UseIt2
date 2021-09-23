@@ -9,20 +9,19 @@
              SE MUESTRA ESTE DIV     
             -->
         <p class="mt-5 pt-3">
-          Parece que aun no has creado una empresa...
+          Parece que aun no has creado una oportunidad de negocio...
         </p>
-        <button class="btn btn-outline-primary" routerLink="/dashboard">Agregar Empresa</button>
+        <button class="btn btn-outline-primary" routerLink="/dashboard">Agregar Oportunidad de Negocio</button>
       </div>
       <div class="container psxl-5 ms-xl-2">
         <div class="card bg-light col-12 col-xl-12 mt-5" style="max-width: 100%;">
-          <div class="card-header">Invitados</div>
+          <div class="card-header">Oportunidades de Negocio</div>
           <div class="card-body d-flex justify-content-between">
             <div class="card bg-secondary col-12 col-xl-12" style="max-width: 100%;">
               <div class="card-header d-flex">
-                <div class="me-auto mt-2">Estos son los usuarios invitados a tu empresa:</div>
+                <div class="me-auto mt-2">Estas son las oportunidades de negocio que has creado:</div>
                 <div class="ms-auto">
-                  <button type="button" class="boton1 btn-outline-success" (click)="open(mymodal3)">Invitar
-                    Usuarios</button>
+                  <button type="button" class="boton1 btn-outline-success" (click)="open(mymodal5)">Crear Oportunidad de Negocio</button>
                 </div>
               </div>
               <div class="card-body">
@@ -36,10 +35,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let user of users" class="table-light " style="vertical-align: middle;">
-                        <td>{{user.displayName}}</td>
-                        <td>{{user.email}}</td>
-                        <td class="d-flex justify-content-end">
+                      <tr class="table-light " style="vertical-align: middle;">
+                        <td>Nombre</td>
+                        <td>Email</td>
+                        <td class="d-flex justify-content-end"><button type="button"
+                            class="boton1 btn-outline-warning m-2 ">Editar</button>
                           <button type="button" class="boton1 btn-outline-danger m-2 ">Eliminar</button>
                         </td>
                       </tr>
@@ -55,7 +55,7 @@
   </div>
 </div>
 
-<ng-template #mymodal3 let-modal>
+<ng-template #mymodal5 let-modal>
   <div class="modal-header">
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true"></span>
