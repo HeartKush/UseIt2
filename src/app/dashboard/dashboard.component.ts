@@ -21,11 +21,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userName: any;
   emailUser: any;
   users:any[]=[];
+  countries : any[] = [];
+  selected_country_code:string = '';
+  states : any[] = [];
+  cities : any[] = [];
 
   constructor(private enterpriseService: EnterpriseService, private modalService: NgbModal, private router: Router, private firestoreModule: AngularFirestore, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
     console.log(Country.getAllCountries());
+    this.countries = Country.getAllCountries();
     console.log(State.getAllStates());
     this.enterprisesForm = new FormGroup({
       'nit': new FormControl('', Validators.required),
@@ -61,6 +66,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log(query[0].payload.doc.data());
         this.ownerEnterprise = query[0].payload.doc.data();
         this.has_enterprise = true;
+        this.states = State.getStatesOfCountry(this.ownerEnterprise.country)
+        this.cities = City.getCitiesOfState(this.ownerEnterprise.country,this.ownerEnterprise.state)
         this.enterprisesForm = new FormGroup({
           'nit': new FormControl(this.ownerEnterprise.nit, Validators.required),
           'name': new FormControl(this.ownerEnterprise.name, Validators.required),
@@ -73,6 +80,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           'state': new FormControl(this.ownerEnterprise.state, Validators.required),
           'city': new FormControl(this.ownerEnterprise.city, Validators.required)
         });
+        this.ownerEnterprise.state = this.states.find(element => element.isoCode == this.ownerEnterprise.state).name;
+        this.ownerEnterprise.state.replace('Department', '').replace('Region', '').replace('State', '');
+        this.ownerEnterprise.country = this.countries.find(element => element.isoCode == this.ownerEnterprise.country).name;
+
       }else {
         console.log('Ups! parece que aun no has creado una empresa');
       }
@@ -89,7 +100,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   crearEmpresa() {
     if (this.enterprisesForm.invalid){
-      console.log('invalid')
+      console.log('invalid');
+      console.log(this.enterprisesForm)
       return;
     }
     const auth = getAuth();
@@ -110,7 +122,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
 
   }
-  
+  getStates(country:any){
+    console.log(country)
+    this.selected_country_code = country;
+    this.states = State.getStatesOfCountry(country);
+
+    console.log(this.states)
+  }
+  getCities(state:any){
+    console.log(state);
+    this.cities = City.getCitiesOfState(this.selected_country_code, state);
+    console.log(this.cities);
+  }
   open(content:any) {
     let dos = this;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result:any) => {

@@ -158,15 +158,22 @@
         </div>
         <div class="form-group">
           <label for="country" class="form-label ps-1 pt-2">País</label>
-          <input formControlName="country" type="text" class="form-control">
+          <select class="form-control" formControlName="country" (change)="getStates($any($event.target).value)">
+            <option *ngFor="let country of countries" value="{{country.isoCode}}">{{country.name}}</option>
+          </select>
+
         </div>
         <div class="form-group">
           <label for="state" class="form-label ps-1 pt-2">Departamento</label>
-          <input formControlName="state" type="text" class="form-control">
+          <select class="form-control" formControlName="state" (change)="getCities($any($event.target).value)">
+            <option *ngFor="let state of states" value="{{state.isoCode}}">{{state.name.replace('Department', '').replace('State','')}}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="city" class="form-label ps-1 pt-2">Ciudad</label>
-          <input formControlName="city" type="text" class="form-control">
+          <select class="form-control" formControlName="city">
+            <option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</option>
+          </select>
         </div>
       </fieldset>
     </form>
