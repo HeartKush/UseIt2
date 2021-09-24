@@ -5,21 +5,37 @@ Este es el link del repositorio del proyecto: https://github.com/HeartKush/UseIt
 Este sistema no está 100% completado, sin embargo, el diseño y todas las vistan están a más del 75% completadas, desde mi criterio.
 
 Actualmente el sistema cuenta con una autentificación de usuarios por medio de FirebaseAuth. El sistema aparte de las vistas de Inicio de Sesión y Registro de Usuario cuenta con cinco vistas protegidas las cuales son:
+
 •	Inicio:
+
 o	Sección (Mi Empresa): En esta vista el usuario podrá crear su empresa si no ha creado una antes, se le permitirá crear una a través del botón “Crear Empresa” el cual le desplegará un modal con un form.
+
 o	Sección (Invitados): En esta vista se listarán los Usuarios del sistema que no estén invitados a la empresa asociada al usuario logado.
+
 •	Empresas:
+
 o	Si el usuario no tiene empresa y tampoco este invitado a ninguna empresa, no podrá acceder a la sección de empresas. 
+
 o	Si el usuario no tiene empresa y tampoco este invitado a ninguna empresa, no saldrá el botón de agregar empresa, pero podrá acceder a la sección, saldrá un mensaje invitando a crear una empresa redirigiendo al inicio.
+
 o	Se listarán las empresas clientes a las que el usuario actual tenga acceso, mientras que el usuario tenga acceso a ellas podrá eliminar, editar o crear nuevas empresas cliente y asociarlas a las empresas en las que el este invitado o a su propia empresa.
+
 •	Invitados:
+
 o	En esta vista el usuario podrá invitar otros usuarios a su empresa.
+
 o	Se listarán los invitados a los que el usuario actual tenga acceso.
+
 •	Contactos:
+
 o	En esta vista el usuario podrá crear contactos y asociarlos a una empresa cliente del sistema.
+
 o	Se listarán los Contactos a los que el usuario actual tenga acceso.
+
 •	Oportunidades de negocio:
+
 o	En esta vista el usuario podrá crear oportunidades de negocio entre una empresa cliente y una empresa a la que este invitado o a su propia empresa.
+
 o	Se listarán las oportunidades de negocio a las que el usuario actual tenga acceso.
 
 
