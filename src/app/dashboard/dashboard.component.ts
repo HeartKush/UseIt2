@@ -136,10 +136,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   open(content:any) {
     let dos = this;
+    
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result:any) => {
       if(result == 'Save click' ){
         console.log('si');
         dos.crearEmpresa();
+
       }
       console.log(`Closed with: ${result}`);
     }, (reason) => {

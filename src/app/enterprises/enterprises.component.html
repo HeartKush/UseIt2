@@ -6,17 +6,7 @@
 
     </div>
     <div class="col-md-8 col-lg-9 col-xl-10">
-      <div class="container ps-xl-5 ms-xl-2 justify-content-center text-center">
-        <!-- SI EL USUARIO ACTUAL NO HA CREADO UNA EMPRESA PROPIETARIA
-             SE MUESTRA ESTE DIV     
-            -->
-
-
-        <p class="mt-5 pt-3">
-          Parece que aun no has creado una empresa...
-        </p>
-        <button class="btn btn-outline-primary" routerLink="/dashboard">Agregar Empresa</button>
-      </div>
+     
       <div class="container psxl-5 ms-xl-2">
         <div class="card bg-light col-12 col-xl-12 mt-5" style="max-width: 100%;">
             <div class="card-header">Empresas Cliente</div>
@@ -25,7 +15,7 @@
                 <div class="card-header d-flex">
                   <div class="me-auto mt-2">Esta es la lista de empresa clientes:</div>
                   <div class="ms-auto">
-                    <button type="button" class="boton1 btn-outline-success ">Agregar Empresa Cliente</button>
+                    <button type="button" class="boton1 btn-outline-success " (click)="open(mymodal)">Agregar Empresa Cliente</button>
                   </div>
   
   
@@ -50,7 +40,7 @@
                           <td>coca@coca.coca</td>
                           <td>seven up</td>
                           <td class="d-flex justify-content-end"><button type="button"
-                              class="boton1 btn-outline-warning m-2 ">Editar</button>
+                              class="boton1 btn-outline-warning m-2 " (click)="open(mymodal)">Editar</button>
                               <button type="button"
                               class="boton1 btn-outline-danger m-2 ">Eliminar</button>
                           </td>
@@ -74,3 +64,74 @@
 
   </div>
 </div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <h4 class="modal-title text-center fw-bolder" id="modal-basic-title">Nueva Empresa</h4>
+
+  <div class="modal-body">
+
+    <form id="enviar_form" [formGroup]="enterprisesForm" (ngSubmit)="crearEmpresa()" class="mx-2 pb-2">
+      <fieldset>
+        <div class="form-group">
+          <label for="nit" class="form-label ps-1 pt-2">Nit</label>
+          <input formControlName="nit" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="name" class="form-label ps-1 pt-2">Nombre</label>
+          <input formControlName="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="comercial_name" class="form-label ps-1 pt-2">Nombre Comercial</label>
+          <input formControlName="comercial_name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="address" class="form-label ps-1 pt-2">Direcciòn</label>
+          <input formControlName="address" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="phone_number" class="form-label ps-1 pt-2">Teléfono</label>
+          <input formControlName="phone_number" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label ps-1 pt-2">Correo</label>
+          <input formControlName="email" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="website" class="form-label ps-1 pt-2">Página Web</label>
+          <input formControlName="website" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="country" class="form-label ps-1 pt-2">País</label>
+          <select class="form-control" formControlName="country" (change)="getStates($any($event.target).value)">
+            <option *ngFor="let country of countries" value="{{country.isoCode}}">{{country.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="state" class="form-label ps-1 pt-2">Departamento</label>
+          <select class="form-control" formControlName="state" (change)="getCities($any($event.target).value)">
+            <option *ngFor="let state of states" value="{{state.isoCode}}">{{state.name.replace('Department', '').replace('State','')}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="city" class="form-label ps-1 pt-2">Ciudad</label>
+          <select class="form-control" formControlName="city">
+            <option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</option>
+          </select>
+        </div>
+      </fieldset>
+    </form>
+    <!-- ACA VA EL FORMULARIO XD -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Guardar</button>
+  </div>
+
+
+</ng-template>

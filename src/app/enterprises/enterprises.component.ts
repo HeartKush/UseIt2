@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { EnterpriseService } from '../services/model/enterprise.service'
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { EnterpriseService } from '../services/model/enterprise.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { getAuth } from "firebase/auth";
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Country, State, City }  from 'country-state-city';
 interface Enterprise{ 
   nit: string,
   rol: string,
@@ -30,8 +32,12 @@ interface Enterprise{
 export class EnterprisesComponent implements OnInit {
   enterprisesForm: FormGroup | any;
   enterprise : any = '';
-
-  constructor(private enterpriseService: EnterpriseService, private router: Router, private afAuth: AngularFireAuth) { }
+  countries : any[] = [];
+  selected_country_code:string = '';
+  states : any[] = [];
+  cities : any[] = [];
+  
+  constructor(private enterpriseService: EnterpriseService, private modalService: NgbModal, private router: Router, private firestoreModule: AngularFirestore, private afAuth: AngularFireAuth) { }
 
 
   ngOnInit(): void {
@@ -76,6 +82,43 @@ export class EnterprisesComponent implements OnInit {
     }).catch(() => {
 
     });
+  }
+
+  getStates(country:any){
+    console.log(country)
+    this.selected_country_code = country;
+    this.states = State.getStatesOfCountry(country);
+
+    console.log(this.states)
+  }
+  getCities(state:any){
+    console.log(state);
+    this.cities = City.getCitiesOfState(this.selected_country_code, state);
+    console.log(this.cities);
+  }
+  open(content:any) {
+    let dos = this;
+    
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result:any) => {
+      if(result == 'Save click' ){
+        console.log('si');
+        dos.crearEmpresa();
+
+      }
+      console.log(`Closed with: ${result}`);
+    }, (reason) => {
+      console.log(`Dismissed ${this.getDismissReason(reason)}`)
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
 }

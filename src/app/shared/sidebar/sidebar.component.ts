@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   item_selected:string = 'dashboard';
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
 
@@ -23,5 +24,9 @@ export class SidebarComponent implements OnInit {
     });
 
   }
+
+  logout(): void {
+    this.afAuth.signOut();
+}
 
 }

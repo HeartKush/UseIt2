@@ -122,14 +122,6 @@
     </a>
   </li>
   <li>
-    <a class="nav-link link-dark" routerLink="/invitados" data-current-item="invitados" >
-      <svg class="bi me-2" width="16" height="16">
-        <use xlink:href="#people-circle"></use>
-      </svg>
-      INVITADOS
-    </a>
-  </li>
-  <li>
     <a class="nav-link link-dark" routerLink="/contactos" data-current-item="contactos" >
       <svg class="bi me-2" width="16" height="16">
         <use xlink:href="#grid"></use>
@@ -145,8 +137,14 @@
       OPORTUNIDADES DE NEGOCIO
     </a>
   </li>
-
+  
+  <div *ngIf="(afAuth.user | async)" class="mt-5">
+    <button type="button" class="btn btn-outline-info align-btn " (click)="logout()">
+        Cerrar Sesión
+    </button>
+  </div>
 </ul>
+
 
 
 

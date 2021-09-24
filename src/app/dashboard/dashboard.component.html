@@ -75,36 +75,39 @@
           </div>
         </div>
         <!-- lista usuarios -->
-        <div class="card bg-light col-12 col-xl-12 mt-5" style="max-width: 100%;">
-          <div class="card-header">Invitados</div>
-          <div class="card-body d-flex justify-content-between">
-            <div class="card bg-secondary col-12 col-xl-12" style="max-width: 100%;">
-              <div class="card-header d-flex">
-                <div class="me-auto mt-2">Nombre de la empresa</div>
-                <div class="ms-auto">
-                  <button type="button" class="boton1 btn-outline-success " routerLink="/invitados">Invitar Usuarios</button>
+        <div class="container psxl-5 ms-xl-2">
+          <div class="card bg-light col-12 col-xl-12 mt-5" style="max-width: 100%;">
+            <div class="card-header">Invitados</div>
+            <div class="card-body d-flex justify-content-between">
+              <div class="card bg-secondary col-12 col-xl-12" style="max-width: 100%;">
+                <div class="card-header d-flex">
+                  <div class="me-auto mt-2">Estos son los usuarios invitados a tu empresa:</div>
+                  <div class="ms-auto">
+                    <button type="button" class="boton1 btn-outline-success" (click)="open(mymodal3)">Invitar
+                      Usuarios</button>
+                  </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <div class="card-text d-flex justify-content-between  col-12">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr class="table-secondary">
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody  *ngFor="let user of users">
-                      <tr class="table-light " style="vertical-align: middle;">
-                        <td>{{user.displayName}}</td>
-                        <td>{{user.email}}</td>
-                        <td class="d-flex justify-content-end"><button type="button"
-                            class="boton1 btn-outline-info m-2 " routerLink="/invitados">Administrar</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="card-body">
+                  <div class="card-text d-flex justify-content-between  col-12">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr class="table-secondary">
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Email</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let user of users" class="table-light " style="vertical-align: middle;">
+                          <td>{{user.displayName}}</td>
+                          <td>{{user.email}}</td>
+                          <td class="d-flex justify-content-end">
+                            <button type="button" class="boton1 btn-outline-danger m-2 ">Eliminar</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,7 +164,6 @@
           <select class="form-control" formControlName="country" (change)="getStates($any($event.target).value)">
             <option *ngFor="let country of countries" value="{{country.isoCode}}">{{country.name}}</option>
           </select>
-
         </div>
         <div class="form-group">
           <label for="state" class="form-label ps-1 pt-2">Departamento</label>
@@ -250,4 +252,33 @@
   </div>
 
 
+</ng-template>
+
+<ng-template #mymodal3 let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <h4 class="modal-title text-center fw-bolder" id="modal-basic-title">Invitar Usuario</h4>
+  <div class="modal-body">
+    <form>
+      <fieldset>
+        <div class="form-group">
+          <label for="exampleSelect1" class="form-label mt-4">Selecciona un contacto</label>
+          <select  class="form-select" id="exampleSelect1"  >
+            <option >andres</option>
+            <option >diego</option>
+            <option >daniela</option>
+            <option >camilo</option>
+            
+          </select>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Cancel click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Invitar</button>
+  </div>
 </ng-template>
